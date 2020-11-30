@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Bogus.Examples._Resources;
+using Bogus.Examples.Extensions;
+using System.Linq;
 
 namespace Bogus.Examples
 {
@@ -6,7 +8,15 @@ namespace Bogus.Examples
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            foreach (var categoriaDoFaker in new Faker().ObterListaDeCategoriaFaker())
+            {
+                foreach (var metodo in categoriaDoFaker.ListaDeMetodoDaCategoriaDoFaker)
+                {
+                    metodo.ToStringComParametros().EscreverNaTela();
+                    metodo.ExecutarMetodo().EscreverNaTelaEmFormatoJson();
+                    GenericoResource.Separador.EscreverNaTela();
+                }
+            }
         }
     }
 }
